@@ -123,6 +123,106 @@
       },
       "tags": [],
       "implicitDependencies": ["angular-island"]
+    },
+    "react-island": {
+      "root": "apps/react-island",
+      "sourceRoot": "apps/react-island/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "defaultConfiguration": "production",
+          "options": {
+            "outputPath": "dist/apps/react-island",
+            "index": "apps/react-island/src/index.html",
+            "baseHref": "/",
+            "main": "apps/react-island/src/main.tsx",
+            "polyfills": "apps/react-island/src/polyfills.ts",
+            "tsConfig": "apps/react-island/tsconfig.app.json",
+            "assets": [
+              "apps/react-island/src/favicon.ico",
+              "apps/react-island/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/react-island/src/environments/environment.ts",
+                  "with": "apps/react-island/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "react-island:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "react-island:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/react-island/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/react-island"],
+          "options": {
+            "jestConfig": "apps/react-island/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "react-island-e2e": {
+      "root": "apps/react-island-e2e",
+      "sourceRoot": "apps/react-island-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/react-island-e2e/cypress.json",
+            "devServerTarget": "react-island:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "react-island:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/react-island-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["react-island"]
     }
   }
 }
