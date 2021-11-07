@@ -135,7 +135,7 @@ export function App() {
     <StyledApp>
       <header className="flex">
         <Logo width="75" height="75" />
-        <h1>Welcome to react-island!</h1>
+        <h1>React Island</h1>
       </header>
       <main>
         
